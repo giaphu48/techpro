@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
@@ -57,6 +58,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Toaster position="bottom-right" richColors theme="system" />
           <Header />
           <main className="flex-1">{children}</main>
           <Footer />
