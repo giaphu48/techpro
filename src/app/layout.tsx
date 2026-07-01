@@ -3,6 +3,7 @@ import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -52,11 +53,14 @@ export default function RootLayout({
     <html
       lang="vi"
       className={`${inter.variable} ${robotoMono.variable} scroll-smooth antialiased`}
+      suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
