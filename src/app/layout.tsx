@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
 import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { CartProvider } from "@/context/CartContext";
-import { CartDrawer } from "@/components/cart/CartDrawer";
+import dynamic from "next/dynamic";
+import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
+
+const Toaster = dynamic(() => import("sonner").then(mod => mod.Toaster));
 
 const inter = Inter({
   variable: "--font-inter",
@@ -64,8 +66,8 @@ export default function RootLayout({
             <Toaster position="bottom-right" richColors theme="system" />
             <Header />
             <main className="flex-1">{children}</main>
-            <Footer />
-            <CartDrawer />
+            <ConditionalFooter />
+            <CartDrawerWrapper />
           </CartProvider>
         </ThemeProvider>
       </body>

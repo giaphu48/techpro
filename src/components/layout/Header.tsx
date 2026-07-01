@@ -5,9 +5,11 @@ import { ThemeToggle } from './ThemeToggle';
 import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function Header() {
+    const pathname = usePathname();
     const { totalItems, setIsCartOpen } = useCart();
     const [mounted, setMounted] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -28,7 +30,7 @@ export function Header() {
                 <Link href="/" className="text-xl font-bold tracking-tight text-black dark:text-white z-50">
                     TechPro<span className="text-blue-600">.</span>
                 </Link>
-                
+
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex gap-6">
                     {navLinks.map((link) => (
@@ -40,7 +42,7 @@ export function Header() {
 
                 <div className="flex items-center gap-2 sm:gap-4 z-50">
                     <ThemeToggle />
-                    
+
                     <button
                         onClick={() => setIsCartOpen(true)}
                         className="relative p-2 text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors rounded-full hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -55,10 +57,10 @@ export function Header() {
                     </button>
 
                     <Link
-                        href="/#register"
+                        href={pathname === '/auth' ? '/' : '/auth'}
                         className="hidden sm:inline-flex rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
                     >
-                        Đăng ký ngay
+                        {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập'}
                     </Link>
 
                     {/* Mobile Menu Toggle */}
@@ -93,11 +95,11 @@ export function Header() {
                                 </Link>
                             ))}
                             <Link
-                                href="/#register"
+                                href={pathname === '/auth' ? '/' : '/auth'}
                                 onClick={() => setIsMobileMenuOpen(false)}
                                 className="mt-4 text-center rounded-full bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
                             >
-                                Đăng ký ngay
+                                {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập / Đăng ký'}
                             </Link>
                         </nav>
                     </motion.div>
