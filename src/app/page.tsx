@@ -1,9 +1,13 @@
+import { Hero } from "@/components/home/Hero";
+import { Features } from "@/components/home/Features";
+import { TechSpecs } from "@/components/home/TechSpecs";
+
 export default function Home() {
   return (
-    <div className="container mx-auto px-4 py-16 sm:px-6 lg:px-8">
-      <h1 className="text-4xl font-bold tracking-tight sm:text-6xl text-center">
-        Trang chủ
-      </h1>
-    </div>
+    <>
+      <Hero />
+      <Features />
+      <TechSpecs />
+    </>
   );
 }
