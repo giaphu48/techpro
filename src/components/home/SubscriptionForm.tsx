@@ -63,16 +63,18 @@ export function SubscriptionForm() {
                 {status === 'loading' ? 'Đang xử lý...' : status === 'success' ? 'Đã đăng ký!' : 'Đăng ký ngay'}
               </button>
             </div>
-            {status === 'success' && (
-              <p className="absolute -bottom-8 left-0 right-0 text-green-300 text-sm mt-2 font-medium">
-                Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm nhất.
-              </p>
-            )}
-            {status === 'error' && (
-              <p className="absolute -bottom-8 left-0 right-0 text-red-300 text-sm mt-2 font-medium">
-                {errorMessage}
-              </p>
-            )}
+            <div className="min-h-[2rem] mt-3">
+              {status === 'success' && (
+                <p className="text-green-300 text-sm font-medium">
+                  Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm nhất.
+                </p>
+              )}
+              {status === 'error' && (
+                <p className="text-red-300 text-sm font-medium">
+                  {errorMessage}
+                </p>
+              )}
+            </div>
           </form>
         </div>
       </div>
