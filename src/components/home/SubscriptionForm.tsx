@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export function SubscriptionForm() {
   const [email, setEmail] = useState('');
@@ -32,12 +33,26 @@ export function SubscriptionForm() {
     <section id="register" className="py-24 bg-indigo-600 dark:bg-indigo-900 relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500 dark:bg-indigo-800 rounded-full blur-3xl opacity-50" />
-        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500 dark:bg-purple-800 rounded-full blur-3xl opacity-50" />
+        <motion.div 
+          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500 dark:bg-indigo-800 rounded-full blur-3xl opacity-50" 
+        />
+        <motion.div 
+          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500 dark:bg-purple-800 rounded-full blur-3xl opacity-50" 
+        />
       </div>
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl mx-auto text-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mx-auto text-center"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 tracking-tight">
             Đừng bỏ lỡ ưu đãi độc quyền
           </h2>
@@ -55,28 +70,38 @@ export function SubscriptionForm() {
                 className="flex-1 w-full px-6 py-4 rounded-full border-2 border-transparent bg-white/10 dark:bg-black/20 text-white placeholder-indigo-200 focus:outline-none focus:border-white/50 focus:bg-white/20 transition-all backdrop-blur-sm"
                 required
               />
-              <button
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 type="submit"
                 disabled={status === 'loading' || status === 'success'}
                 className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-indigo-600 font-semibold hover:bg-indigo-50 transition-colors disabled:opacity-70 disabled:cursor-not-allowed whitespace-nowrap shadow-lg"
               >
                 {status === 'loading' ? 'Đang xử lý...' : status === 'success' ? 'Đã đăng ký!' : 'Đăng ký ngay'}
-              </button>
+              </motion.button>
             </div>
             <div className="min-h-[2rem] mt-3">
               {status === 'success' && (
-                <p className="text-green-300 text-sm font-medium">
+                <motion.p 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-green-300 text-sm font-medium"
+                >
                   Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm nhất.
-                </p>
+                </motion.p>
               )}
               {status === 'error' && (
-                <p className="text-red-300 text-sm font-medium">
+                <motion.p 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-red-300 text-sm font-medium"
+                >
                   {errorMessage}
-                </p>
+                </motion.p>
               )}
             </div>
           </form>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

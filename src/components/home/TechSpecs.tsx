@@ -17,7 +17,7 @@ export function TechSpecs() {
   return (
     <section id="specs" className="py-24 bg-white dark:bg-black">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -31,7 +31,7 @@ export function TechSpecs() {
             Uy lực âm thanh từ bên trong.
           </p>
         </motion.div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -40,7 +40,7 @@ export function TechSpecs() {
         >
           <div className="divide-y divide-gray-200 dark:divide-gray-800">
             {specs.map((spec, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
