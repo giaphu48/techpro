@@ -1,5 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export function Hero() {
   return (
@@ -7,7 +10,12 @@ export function Hero() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-indigo-500/10 dark:bg-indigo-600/20 blur-[120px] rounded-full pointer-events-none" />
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-8">
-          <div className="flex-1 text-center lg:text-left space-y-8">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex-1 text-center lg:text-left space-y-8"
+          >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white">
               Sống động với <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-500">
@@ -31,8 +39,13 @@ export function Hero() {
                 Tìm hiểu thêm
               </Link>
             </div>
-          </div>
-          <div className="flex-1 relative w-full max-w-lg lg:max-w-none">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="flex-1 relative w-full max-w-lg lg:max-w-none"
+          >
             <div className="relative aspect-square md:aspect-[4/3] lg:aspect-square">
               <Image
                 src="/sony-ult-wear.png"
@@ -43,7 +56,7 @@ export function Hero() {
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
