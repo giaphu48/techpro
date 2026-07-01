@@ -2,8 +2,8 @@
 
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { toast } from 'sonner';
 import { Product } from '@/types/product';
+import { useCart } from '@/context/CartContext';
 
 interface ProductCardProps {
   product: Product;
@@ -11,8 +11,10 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
+  const { addItem } = useCart();
+
   const handleAddToCart = () => {
-    toast.success(`Đã thêm ${product.name} vào giỏ hàng!`);
+    addItem(product);
   };
 
   return (

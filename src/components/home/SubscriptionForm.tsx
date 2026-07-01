@@ -10,8 +10,6 @@ const emailSchema = z.string().email('Vui lòng nhập định dạng email hợ
 export function SubscriptionForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [errorMessage, setErrorMessage] = useState('');
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
@@ -20,16 +18,13 @@ export function SubscriptionForm() {
     if (!validation.success) {
       setStatus('error');
       const errorMsg = validation.error.issues[0].message;
-      setErrorMessage(errorMsg);
       toast.error(errorMsg);
       return;
     }
 
     setStatus('loading');
-    setErrorMessage('');
 
     try {
-      // Sử dụng webhook URL từ biến môi trường, hoặc một URL test mặc định
       const webhookUrl = process.env.NEXT_PUBLIC_WEBHOOK_URL || 'https://webhook.site/5cc69ec9-20e3-40e1-bbcb-7cda2cc88d40';
 
       const response = await fetch(webhookUrl, {
@@ -37,7 +32,7 @@ export function SubscriptionForm() {
         headers: {
           'Content-Type': 'application/json',
         },
-        mode: 'no-cors', // Sử dụng no-cors để tránh lỗi CORS khi gọi đến các webhook service public
+        mode: 'no-cors',
         body: JSON.stringify({
           email,
           source: 'TechPro Landing Page',
@@ -51,7 +46,6 @@ export function SubscriptionForm() {
       setTimeout(() => setStatus('idle'), 3000);
     } catch (error) {
       setStatus('error');
-      setErrorMessage('Có lỗi xảy ra khi đăng ký. Vui lòng thử lại sau.');
       toast.error('Có lỗi kết nối. Vui lòng thử lại sau.');
       setTimeout(() => setStatus('idle'), 3000);
     }
@@ -100,26 +94,6 @@ export function SubscriptionForm() {
               >
                 {status === 'loading' ? 'Đang xử lý...' : status === 'success' ? 'Đã đăng ký!' : 'Đăng ký ngay'}
               </motion.button>
-            </div>
-            <div className="min-h-[2rem] mt-3">
-              {status === 'success' && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-green-300 text-sm font-medium"
-                >
-                  Cảm ơn bạn đã đăng ký! Chúng tôi sẽ liên hệ sớm nhất.
-                </motion.p>
-              )}
-              {status === 'error' && (
-                <motion.p
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="text-red-300 text-sm font-medium"
-                >
-                  {errorMessage}
-                </motion.p>
-              )}
             </div>
           </form>
         </motion.div>
