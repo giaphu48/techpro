@@ -1,3 +1,7 @@
+'use client';
+
+import { motion, Variants } from 'framer-motion';
+
 const features = [
   {
     title: 'ULT Power Sound',
@@ -38,21 +42,46 @@ const features = [
   },
 ];
 
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" }
+  },
+};
+
 export function Features() {
   return (
     <section id="features" className="py-24 bg-gray-50 dark:bg-zinc-900/50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0, y: -20 },
+            visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+          }}
+          className="text-center max-w-3xl mx-auto mb-16"
+        >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
             Đẳng cấp âm thanh Sony
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
             Khám phá những công nghệ đột phá làm nên tên tuổi của dòng tai nghe ULT WEAR.
           </p>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-white dark:bg-black p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow">
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-50px" }}
+              className="bg-white dark:bg-black p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 hover:shadow-md transition-shadow"
+            >
               <div className="w-12 h-12 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl flex items-center justify-center mb-6">
                 {feature.icon}
               </div>
@@ -62,7 +91,7 @@ export function Features() {
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
                 {feature.description}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
