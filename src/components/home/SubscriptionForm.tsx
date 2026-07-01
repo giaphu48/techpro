@@ -33,20 +33,12 @@ export function SubscriptionForm() {
     <section id="register" className="py-24 bg-indigo-600 dark:bg-indigo-900 relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <motion.div 
-          animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500 dark:bg-indigo-800 rounded-full blur-3xl opacity-50" 
-        />
-        <motion.div 
-          animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500 dark:bg-purple-800 rounded-full blur-3xl opacity-50" 
-        />
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500 dark:bg-indigo-800 rounded-full blur-3xl opacity-50 animate-blob" />
+        <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-purple-500 dark:bg-purple-800 rounded-full blur-3xl opacity-50 animate-blob-delayed" />
       </div>
 
       <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
@@ -82,7 +74,7 @@ export function SubscriptionForm() {
             </div>
             <div className="min-h-[2rem] mt-3">
               {status === 'success' && (
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-green-300 text-sm font-medium"
@@ -91,7 +83,7 @@ export function SubscriptionForm() {
                 </motion.p>
               )}
               {status === 'error' && (
-                <motion.p 
+                <motion.p
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   className="text-red-300 text-sm font-medium"
