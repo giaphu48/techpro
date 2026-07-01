@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
-import { toast } from 'sonner';
 
 const features = [
   {
@@ -59,7 +58,6 @@ export function Features() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          onViewportEnter={() => toast.success('Bạn đang xem các tính năng nổi bật!')}
           viewport={{ once: true, margin: "-100px" }}
           variants={{
             hidden: { opacity: 0, y: -20 },

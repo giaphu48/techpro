@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { toast } from 'sonner';
 
 const specs = [
   { label: 'Bộ màng loa', value: '40 mm (Loại vòm)' },
@@ -21,7 +20,6 @@ export function TechSpecs() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          onViewportEnter={() => toast.success('Bạn đang xem thông số kỹ thuật!')}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"

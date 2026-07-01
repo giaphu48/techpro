@@ -9,17 +9,20 @@ export function Header() {
                     TechPro<span className="text-blue-600">.</span>
                 </Link>
                 <nav className="hidden md:flex gap-6">
-                    <Link href="#features" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
+                    <Link href="/products" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
+                        Sản phẩm
+                    </Link>
+                    <Link href="/#features" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
                         Tính năng
                     </Link>
-                    <Link href="#specs" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
+                    <Link href="/#specs" className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
                         Thông số
                     </Link>
                 </nav>
                 <div className="flex items-center gap-4">
                     <ThemeToggle />
                     <Link
-                        href="#register"
+                        href="/#register"
                         className="rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
                     >
                         Đăng ký ngay

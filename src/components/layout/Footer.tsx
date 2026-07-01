@@ -7,7 +7,10 @@ export function Footer() {
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                     © {new Date().getFullYear()} TechPro. All rights reserved.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex flex-wrap gap-4">
+                    <Link href="/products" className="text-sm font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors">
+                        Sản phẩm
+                    </Link>
                     <Link href="#" className="text-sm text-gray-500 hover:text-black dark:hover:text-white transition-colors">
                         Chính sách bảo mật
                     </Link>
