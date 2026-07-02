@@ -57,16 +57,16 @@ export function AuthForm() {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: 'easeOut' }}
-      className="w-full rounded-[2rem] bg-white/75 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-white/10 p-8 shadow-xl dark:shadow-2xl relative transition-all duration-300"
+      className="w-full rounded-[2rem] bg-white/75 dark:bg-zinc-900/40 backdrop-blur-2xl border border-zinc-200/50 dark:border-white/10 p-8 shadow-xl dark:shadow-2xl relative"
     >
       {/* Decorative inner glow */}
       <div className="absolute inset-0 rounded-[2rem] shadow-[inset_0_0_0_1px_rgba(255,255,255,0.6)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] pointer-events-none" />
 
       {/* Tabs */}
-      <div className="flex gap-2 p-1.5 bg-zinc-100 dark:bg-zinc-950/50 rounded-2xl mb-8 relative z-10 transition-colors duration-300">
+      <div className="flex gap-2 p-1.5 bg-zinc-100 dark:bg-zinc-950/50 rounded-2xl mb-8 relative z-10">
         <button
           onClick={() => setIsLogin(true)}
-          className={`flex-1 py-3 text-sm font-semibold rounded-xl transition-all duration-300 relative ${isLogin ? 'text-zinc-950 dark:text-white' : 'text-zinc-400 hover:text-zinc-700 dark:text-gray-500 dark:hover:text-gray-300'
+          className={`flex-1 py-3 text-sm font-semibold rounded-xl relative ${isLogin ? 'text-zinc-950 dark:text-white' : 'text-zinc-400 hover:text-zinc-700 dark:text-gray-500 dark:hover:text-gray-300'
             }`}
         >
           {isLogin && (
@@ -104,10 +104,10 @@ export function AuthForm() {
               transition={{ duration: 0.3, type: 'spring', bounce: 0 }}
             >
               <div
-                className={`relative group rounded-xl transition-all duration-300 border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'name' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
+                className={`relative group rounded-xl border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'name' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
                   }`}
               >
-                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-300">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <User className={`h-5 w-5 ${focusedField === 'name' ? 'text-indigo-500 dark:text-indigo-400' : 'text-zinc-400 dark:text-gray-500'}`} />
                 </div>
                 <input
@@ -125,7 +125,7 @@ export function AuthForm() {
         </AnimatePresence>
 
         <div
-          className={`relative group rounded-xl transition-all duration-300 border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'email' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
+          className={`relative group rounded-xl border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'email' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
             }`}
         >
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-300">
@@ -143,7 +143,7 @@ export function AuthForm() {
         </div>
 
         <div
-          className={`relative group rounded-xl transition-all duration-300 border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'password' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
+          className={`relative group rounded-xl border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'password' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
             }`}
         >
           <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-300">

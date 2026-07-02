@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 export default function AuthPage() {
   return (
-    <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 overflow-hidden transition-colors duration-300">
+    <div className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 overflow-hidden transition-colors duration-150">
       {/* Immersive Animated Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-indigo-600/10 dark:bg-indigo-600/20 blur-[120px] animate-blob" />
@@ -20,10 +20,10 @@ export default function AuthPage() {
       {/* Floating Centered Container */}
       <div className="relative z-10 w-full max-w-md px-6 py-12">
         <div className="text-center mb-10">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-3 drop-shadow-sm transition-colors duration-300">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white tracking-tight mb-3 drop-shadow-sm">
             TechPro<span className="text-indigo-500">.</span>
           </h1>
-          <p className="text-zinc-500 dark:text-zinc-400 text-lg transition-colors duration-300">Khám phá thế giới công nghệ</p>
+          <p className="text-zinc-500 dark:text-zinc-400 text-lg">Khám phá thế giới công nghệ</p>
         </div>
 
         <AuthForm />
