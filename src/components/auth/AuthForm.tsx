@@ -10,15 +10,39 @@ import api from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
-const loginSchema = z.object({
-  email: z.string().email('Email không hợp lệ'),
-  password: z.string().min(6, 'Mật khẩu phải có ít nhất 6 ký tự'),
+const registerSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, 'Tên phải có ít nhất 2 ký tự'),
+
+  email: z
+    .string()
+    .trim()
+    .email('Email không hợp lệ'),
+
+  password: z
+    .string()
+    .min(6, 'Mật khẩu phải có ít nhất 6 ký tự')
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-[\]\\/~`+=;']).{6,}$/,
+      'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.'
+    ),
 });
 
-const registerSchema = z.object({
-  name: z.string().min(2, 'Tên phải có ít nhất 2 ký tự'),
-  email: z.string().email('Email không hợp lệ'),
-  password: z.string().min(6, 'Mật khẩu phải có ít nhất 6 ký tự'),
+const loginSchema = z.object({
+  email: z
+    .string()
+    .trim()
+    .email('Email không hợp lệ'),
+
+  password: z
+    .string()
+    .min(6, 'Mật khẩu phải có ít nhất 6 ký tự')
+    .regex(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-[\]\\/~`+=;']).{6,}$/,
+      'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.'
+    ),
 });
 
 export function AuthForm() {
