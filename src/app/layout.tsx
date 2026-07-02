@@ -8,12 +8,8 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
 import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
-<<<<<<< HEAD
 import { AIChatWidget } from "@/components/chat/AIChatWidget";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-=======
-import { AIChatWidgetWrapper } from "@/components/chat/AIChatWidgetWrapper";
->>>>>>> perf/speed-insights
 
 const Toaster = dynamic(() => import("sonner").then(mod => mod.Toaster));
 
@@ -82,7 +78,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <ConditionalFooter />
               <CartDrawerWrapper />
-              <AIChatWidgetWrapper />
+              <AIChatWidget />
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
