@@ -10,41 +10,6 @@ import api from '@/lib/api';
 import { useAuth } from '@/context/AuthContext';
 import { useRouter } from 'next/navigation';
 
-const registerSchema = z.object({
-  name: z
-    .string()
-    .trim()
-    .min(2, 'Tên phải có ít nhất 2 ký tự'),
-
-  email: z
-    .string()
-    .trim()
-    .email('Email không hợp lệ'),
-
-  password: z
-    .string()
-    .min(6, 'Mật khẩu phải có ít nhất 6 ký tự')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-[\]\\/~`+=;']).{6,}$/,
-      'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.'
-    ),
-});
-
-const loginSchema = z.object({
-  email: z
-    .string()
-    .trim()
-    .email('Email không hợp lệ'),
-
-  password: z
-    .string()
-    .min(6, 'Mật khẩu phải có ít nhất 6 ký tự')
-    .regex(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>_\-[\]\\/~`+=;']).{6,}$/,
-      'Mật khẩu phải có ít nhất 6 ký tự, bao gồm ít nhất 1 chữ hoa, 1 chữ thường, 1 chữ số và 1 ký tự đặc biệt.'
-    ),
-});
-
 export function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,13 +29,11 @@ export function AuthForm() {
 
     try {
       if (isLogin) {
-        loginSchema.parse({ email, password });
         const response = await api.post('/api/users/login', { email, password });
         login(response.data.user, response.data.token);
         toast.success('Đăng nhập thành công!');
         router.push('/');
       } else {
-        registerSchema.parse({ name, email, password });
         const response = await api.post('/api/users', { name, email, password });
         toast.success(response.data.message || 'Đăng ký thành công!');
         setIsLogin(true);
