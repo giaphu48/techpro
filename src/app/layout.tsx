@@ -9,6 +9,7 @@ import { AuthProvider } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
 import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
 import { AIChatWidget } from "@/components/chat/AIChatWidget";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const Toaster = dynamic(() => import("sonner").then(mod => mod.Toaster));
 
@@ -75,6 +76,7 @@ export default function RootLayout({
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
