@@ -8,6 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
+import { toast } from 'sonner';
 
 export function Header() {
     const pathname = usePathname();
@@ -22,8 +23,9 @@ export function Header() {
 
     const navLinks = [
         { href: '/products', label: 'Sản phẩm' },
-        { href: '/#features', label: 'Tính năng' },
-        { href: '/#specs', label: 'Thông số' },
+        { href: '/news', label: 'Tin tức' },
+        { href: '/stores', label: 'Danh sách cửa hàng' },
+        { href: '/contact', label: 'Liên hệ' },
     ];
 
     return (
@@ -36,7 +38,17 @@ export function Header() {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex gap-6">
                     {navLinks.map((link) => (
-                        <Link key={link.href} href={link.href} className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors">
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            onClick={(e) => {
+                                if (link.href !== '/products') {
+                                    e.preventDefault();
+                                    toast.info('Tính năng đang được phát triển');
+                                }
+                            }}
+                            className="text-sm font-medium text-gray-600 hover:text-black dark:text-gray-300 dark:hover:text-white transition-colors"
+                        >
                             {link.label}
                         </Link>
                     ))}
@@ -65,7 +77,7 @@ export function Header() {
                                     <User className="w-4 h-4" />
                                     {user.name}
                                 </button>
-                                
+
                                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[160px] z-50">
                                     <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 p-2 flex flex-col gap-1 transform origin-top scale-95 group-hover:scale-100 transition-transform">
                                         <Link
@@ -123,7 +135,14 @@ export function Header() {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    onClick={(e) => {
+                                        if (link.href !== '/products') {
+                                            e.preventDefault();
+                                            toast.info('Tính năng đang được phát triển');
+                                        } else {
+                                            setIsMobileMenuOpen(false);
+                                        }
+                                    }}
                                     className="text-lg font-medium text-gray-900 dark:text-white hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                                 >
                                     {link.label}
