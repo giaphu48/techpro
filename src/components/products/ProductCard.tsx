@@ -8,6 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { imageLoader } from '@/lib/imageLoader';
+import { toast } from 'sonner';
 
 interface ProductCardProps {
   product: Product;
@@ -30,7 +31,15 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       router.push('/auth');
       return;
     }
+    
+    const wasFavorited = user?.favorites?.includes(product.id) || false;
     await toggleFavorite(product.id);
+    
+    if (wasFavorited) {
+      toast.info('Đã bỏ sản phẩm khỏi yêu thích');
+    } else {
+      toast.success('Đã thêm sản phẩm vào yêu thích');
+    }
   };
 
   const isFavorited = user?.favorites?.includes(product.id) || false;

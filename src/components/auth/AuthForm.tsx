@@ -204,7 +204,14 @@ export function AuthForm() {
               exit={{ opacity: 0, height: 0 }}
               className="flex justify-end pt-1"
             >
-              <Link href="#" className="text-sm font-medium text-zinc-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors">
+              <Link 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  toast.info('Tính năng đang được phát triển');
+                }}
+                className="text-sm font-medium text-zinc-500 hover:text-indigo-600 dark:text-gray-400 dark:hover:text-indigo-400 transition-colors"
+              >
                 Quên mật khẩu?
               </Link>
             </motion.div>

@@ -8,9 +8,6 @@ export function Footer() {
                     © {new Date().getFullYear()} TechPro. All rights reserved.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                    <Link href="/products" className="text-sm font-medium text-gray-500 hover:text-black dark:hover:text-white transition-colors">
-                        Sản phẩm
-                    </Link>
                     <Link href="#" className="text-sm text-gray-500 hover:text-black dark:hover:text-white transition-colors">
                         Chính sách bảo mật
                     </Link>

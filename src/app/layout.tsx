@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     siteName: "TechPro",
     images: [
       {
-        url: "https://res.cloudinary.com/dlzfacstr/image/upload/v1782921657/sony-ult-wear_kd0xqi.png",
+        url: "https://res.cloudinary.com/dlzfacstr/image/upload/v1783021515/TechProLogo_nbnsti.png",
         width: 1200,
         height: 630,
         alt: "TechPro - Tai nghe chính hãng",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "TechPro - Tai nghe SONY chính hãng",
     description:
       "Khám phá bộ sưu tập tai nghe chính hãng với chất lượng âm thanh vượt trội.",
-    images: ["https://res.cloudinary.com/dlzfacstr/image/upload/v1782921657/sony-ult-wear_kd0xqi.png"],
+    images: ["https://res.cloudinary.com/dlzfacstr/image/upload/v1783021515/TechProLogo_nbnsti.png"],
   },
 };
 
