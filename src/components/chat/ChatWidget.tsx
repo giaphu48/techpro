@@ -238,7 +238,7 @@ export function ChatWidget() {
         onClick={() => setIsOpen(!isOpen)}
         className="w-14 h-14 bg-blue-500 hover:bg-blue-600 text-white rounded-full shadow-lg flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
       >
-        {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
+        {isOpen ? <X aria-label='Đóng cửa sổ chat' size={24} /> : <MessageCircle aria-label='Mở cửa sổ chat' size={24} />}
       </button>
     </div>
   );
