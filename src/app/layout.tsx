@@ -70,7 +70,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
       </head>
       <body className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <AuthProvider>
             <CartProvider>
               <Toaster position="bottom-right" richColors theme="system" />

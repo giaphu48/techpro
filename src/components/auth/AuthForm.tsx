@@ -22,6 +22,7 @@ export function AuthForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,10 +35,16 @@ export function AuthForm() {
         toast.success('Đăng nhập thành công!');
         router.push('/');
       } else {
+        if (password !== confirmPassword) {
+          toast.error('Mật khẩu không khớp!');
+          setIsLoading(false);
+          return;
+        }
         const response = await api.post('/api/users', { name, email, password });
         toast.success(response.data.message || 'Đăng ký thành công!');
         setIsLogin(true);
         setPassword('');
+        setConfirmPassword('');
       }
     } catch (error: any) {
       if (error instanceof z.ZodError) {
@@ -159,6 +166,35 @@ export function AuthForm() {
             className="w-full pl-12 pr-4 py-4 bg-transparent text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-gray-500 transition-all outline-none text-sm"
           />
         </div>
+
+        <AnimatePresence mode="popLayout">
+          {!isLogin && (
+            <motion.div
+              initial={{ opacity: 0, height: 0, scale: 0.95 }}
+              animate={{ opacity: 1, height: 'auto', scale: 1 }}
+              exit={{ opacity: 0, height: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, type: 'spring', bounce: 0 }}
+            >
+              <div
+                className={`relative group rounded-xl border bg-zinc-50 dark:bg-zinc-950/50 overflow-hidden ${focusedField === 'confirmPassword' ? 'border-indigo-500 shadow-[0_0_20px_rgba(99,102,241,0.15)] dark:shadow-[0_0_20px_rgba(99,102,241,0.2)]' : 'border-zinc-200/60 dark:border-white/5 hover:border-zinc-300 dark:hover:border-white/20'
+                  }`}
+              >
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none transition-colors duration-300">
+                  <Lock className={`h-5 w-5 ${focusedField === 'confirmPassword' ? 'text-indigo-500 dark:text-indigo-400' : 'text-zinc-400 dark:text-gray-500'}`} />
+                </div>
+                <input
+                  type="password"
+                  placeholder="Nhập lại mật khẩu"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  onFocus={() => setFocusedField('confirmPassword')}
+                  onBlur={() => setFocusedField(null)}
+                  className="w-full pl-12 pr-4 py-4 bg-transparent text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-gray-500 transition-all outline-none text-sm"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         <AnimatePresence>
           {isLogin && (
