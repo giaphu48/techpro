@@ -1,8 +1,6 @@
 'use client';
-
-import Image from 'next/image';
 import { HeroButtons } from './HeroButtons';
-import { imageLoader } from '@/lib/imageLoader';
+import { HeroImage } from './HeroImage';
 
 export function Hero() {
   return (
@@ -23,18 +21,7 @@ export function Hero() {
             <HeroButtons />
           </div>
           <div className="flex-1 relative w-full max-w-lg lg:max-w-none opacity-0 animate-fade-in-right" style={{ animationDelay: '0.2s' }}>
-            <div className="relative aspect-square md:aspect-[4/3] lg:aspect-square">
-              <Image
-                loader={imageLoader}
-                src="https://res.cloudinary.com/dlzfacstr/image/upload/f_auto,q_auto/v1782921657/sony-ult-wear_kd0xqi.png"
-                alt="Sony ULT WEAR Headphones"
-                fill
-                className="object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
-                priority
-                fetchPriority="high"
-                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 50vw, 450px"
-              />
-            </div>
+            <HeroImage />
           </div>
         </div>
       </div>

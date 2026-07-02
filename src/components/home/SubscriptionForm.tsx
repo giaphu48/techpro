@@ -63,7 +63,6 @@ export function SubscriptionForm() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          onViewportEnter={() => toast.info('Đăng ký ngay để nhận thông báo về những ưu đãi mới nhất!')}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.6 }}
           className="max-w-3xl mx-auto text-center"
