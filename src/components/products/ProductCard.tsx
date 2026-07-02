@@ -44,7 +44,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       transition={{ duration: 0.4 }}
       className="group flex flex-col bg-white dark:bg-zinc-950 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200 dark:border-gray-800 transition-all relative"
     >
-      <div className="relative w-full h-64 bg-gray-50 dark:bg-zinc-900 overflow-hidden">
+      <div className="relative w-full h-52 bg-white overflow-hidden">
         {product.badge && (
           <div className="absolute top-4 left-4 z-10 px-3 py-1 bg-indigo-600 text-white text-xs font-bold rounded-full shadow-md">
             {product.badge}
@@ -63,7 +63,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           alt={product.name}
           fill
           priority={priority}
-          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          className="object-contain object-center p-3 group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px"
         />
       </div>
