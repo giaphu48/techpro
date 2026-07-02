@@ -7,6 +7,7 @@ import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { imageLoader } from '@/lib/imageLoader';
 
 interface ProductCardProps {
   product: Product;
@@ -57,12 +58,13 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
           <Heart className={`w-5 h-5 ${isFavorited ? 'fill-red-500 text-red-500' : ''}`} />
         </button>
         <Image
+          loader={imageLoader}
           src={product.imageUrl}
           alt={product.name}
           fill
           priority={priority}
           className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 300px"
         />
       </div>
 

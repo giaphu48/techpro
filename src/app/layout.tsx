@@ -8,19 +8,25 @@ import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
 import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
+<<<<<<< HEAD
 import { AIChatWidget } from "@/components/chat/AIChatWidget";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+=======
+import { AIChatWidgetWrapper } from "@/components/chat/AIChatWidgetWrapper";
+>>>>>>> perf/speed-insights
 
 const Toaster = dynamic(() => import("sonner").then(mod => mod.Toaster));
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "vietnamese"],
+  display: "swap",
 });
 
 const robotoMono = Roboto_Mono({
   variable: "--font-roboto-mono",
   subsets: ["latin", "vietnamese"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -63,6 +69,10 @@ export default function RootLayout({
       className={`${inter.variable} ${robotoMono.variable} scroll-smooth antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
+      </head>
       <body className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <AuthProvider>
@@ -72,7 +82,7 @@ export default function RootLayout({
               <main className="flex-1">{children}</main>
               <ConditionalFooter />
               <CartDrawerWrapper />
-              <AIChatWidget />
+              <AIChatWidgetWrapper />
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
