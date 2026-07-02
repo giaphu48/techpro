@@ -1,13 +1,22 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { ChatWidget } from '@/components/chat/ChatWidget';
 
 const CartDrawerWrapper = dynamic(
-  () => import('@/components/cart/CartDrawerWrapper').then(mod => mod.CartDrawerWrapper),
+  () =>
+    import('@/components/cart/CartDrawerWrapper').then(
+      (mod) => mod.CartDrawerWrapper
+    ),
   { ssr: false }
 );
 
+const ChatWidget = dynamic(
+  () =>
+    import('@/components/chat/ChatWidget').then(
+      (mod) => mod.ChatWidget
+    ),
+  { ssr: false }
+);
 
 export function ClientWidgets() {
   return (
