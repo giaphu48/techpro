@@ -3,13 +3,28 @@
 import { useState, useEffect } from 'react';
 import { ProductCard } from './ProductCard';
 import { ProductSkeleton } from './ProductSkeleton';
-import { mockProducts } from '@/data/products';
+import api from '@/lib/api';
 import { Product } from '@/types/product';
 import { motion } from 'framer-motion';
 
 export function ProductList() {
-  const [products, setProducts] = useState<Product[]>(mockProducts);
-  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await api.get('/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Lỗi khi tải sản phẩm:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   return (
     <section className="py-24 bg-gray-50 dark:bg-black min-h-screen">
