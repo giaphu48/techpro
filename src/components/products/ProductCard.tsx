@@ -4,6 +4,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Product } from '@/types/product';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
+import { Heart } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
 interface ProductCardProps {
   product: Product;
@@ -12,10 +15,24 @@ interface ProductCardProps {
 
 export function ProductCard({ product, priority = false }: ProductCardProps) {
   const { addItem } = useCart();
+  const { user, toggleFavorite } = useAuth();
+  const router = useRouter();
 
   const handleAddToCart = () => {
     addItem(product);
   };
+
+  const handleFavoriteClick = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!user) {
+      router.push('/auth');
+      return;
+    }
+    await toggleFavorite(product.id);
+  };
+
+  const isFavorited = user?.favorites?.includes(product.id) || false;
 
   return (
     <motion.div
@@ -24,7 +41,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -5 }}
       transition={{ duration: 0.4 }}
-      className="group flex flex-col bg-white dark:bg-zinc-950 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200 dark:border-gray-800 transition-all"
+      className="group flex flex-col bg-white dark:bg-zinc-950 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200 dark:border-gray-800 transition-all relative"
     >
       <div className="relative w-full h-64 bg-gray-50 dark:bg-zinc-900 overflow-hidden">
         {product.badge && (
@@ -32,6 +49,13 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
             {product.badge}
           </div>
         )}
+        <button
+          onClick={handleFavoriteClick}
+          className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/80 dark:bg-black/80 backdrop-blur-sm text-gray-500 hover:text-red-500 dark:text-gray-400 dark:hover:text-red-400 transition-colors shadow-sm"
+          aria-label={isFavorited ? "Bỏ yêu thích" : "Yêu thích"}
+        >
+          <Heart className={`w-5 h-5 ${isFavorited ? 'fill-red-500 text-red-500' : ''}`} />
+        </button>
         <Image
           src={product.imageUrl}
           alt={product.name}

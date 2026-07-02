@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
-import { ShoppingCart, Menu, X, User } from 'lucide-react';
+import { ShoppingCart, Menu, X, User, Heart, LogOut } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
@@ -60,17 +60,31 @@ export function Header() {
 
                     {mounted && !isLoading ? (
                         user ? (
-                            <div className="hidden sm:flex items-center gap-4">
-                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                            <div className="hidden sm:flex relative group">
+                                <button className="flex items-center gap-2 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-black dark:hover:text-white transition-colors">
                                     <User className="w-4 h-4" />
                                     {user.name}
-                                </span>
-                                <button
-                                    onClick={logout}
-                                    className="text-sm font-medium text-red-500 hover:text-red-700 transition-colors"
-                                >
-                                    Đăng xuất
                                 </button>
+                                
+                                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 min-w-[160px] z-50">
+                                    <div className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800 p-2 flex flex-col gap-1 transform origin-top scale-95 group-hover:scale-100 transition-transform">
+                                        <Link
+                                            href="/favorites"
+                                            className="px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-zinc-800 rounded-lg flex items-center gap-2.5 transition-colors"
+                                        >
+                                            <Heart className="w-4 h-4" />
+                                            Đã thích
+                                        </Link>
+                                        <div className="h-px bg-gray-100 dark:bg-gray-800 my-1"></div>
+                                        <button
+                                            onClick={logout}
+                                            className="px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 rounded-lg text-left transition-colors w-full flex items-center gap-2.5"
+                                        >
+                                            <LogOut className="w-4 h-4" />
+                                            Đăng xuất
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         ) : (
                             <Link
@@ -123,6 +137,14 @@ export function Header() {
                                         </div>
                                         <span>Xin chào, {user.name}</span>
                                     </div>
+                                    <Link
+                                        href="/favorites"
+                                        onClick={() => setIsMobileMenuOpen(false)}
+                                        className="text-center rounded-xl border border-gray-200 dark:border-gray-800 px-4 py-3 text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors flex items-center justify-center gap-2"
+                                    >
+                                        <Heart className="w-5 h-5" />
+                                        Đã thích
+                                    </Link>
                                     <button
                                         onClick={() => {
                                             logout();
