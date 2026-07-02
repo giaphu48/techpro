@@ -66,20 +66,20 @@ export default function Chatbot() {
       setMessages((prev) => [...prev, botMessage]);
     } catch (error: any) {
       console.error('Lỗi khi gửi tin nhắn:', error);
-      
+
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: 'model',
         text: error.response?.data?.message || 'Xin lỗi, đã có lỗi xảy ra khi kết nối. Vui lòng thử lại sau.',
       };
-      
+
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }
   };
 
-  return {
+  return (
     <>
       <AnimatePresence>
         {isOpen && (
@@ -111,11 +111,10 @@ export default function Chatbot() {
                   className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   <div
-                    className={`max-w-[80%] p-3 rounded-2xl text-sm ${
-                      msg.role === 'user'
+                    className={`max-w-[80%] p-3 rounded-2xl text-sm ${msg.role === 'user'
                         ? 'bg-blue-600 text-white rounded-tr-none'
                         : 'bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 text-gray-800 dark:text-gray-200 rounded-tl-none'
-                    }`}
+                      }`}
                   >
                     {msg.text}
                   </div>
@@ -163,5 +162,5 @@ export default function Chatbot() {
         {isOpen ? <X size={24} /> : <MessageCircle size={24} />}
       </button>
     </>
-  };
+  );
 }
