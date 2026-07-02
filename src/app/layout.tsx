@@ -7,9 +7,9 @@ import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { CartProvider } from "@/context/CartContext";
 import { AuthProvider } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
-import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
-import { AIChatWidget } from "@/components/chat/AIChatWidget";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+
+import { ClientWidgets } from "@/components/layout/ClientWidgets";
 
 const Toaster = dynamic(() => import("sonner").then(mod => mod.Toaster));
 
@@ -26,10 +26,10 @@ const robotoMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "TechPro - Tai nghe chính hãng",
+  title: "TechPro - Tai nghe SONY chính hãng",
   description: "Khám phá bộ sưu tập tai nghe chính hãng với chất lượng âm thanh vượt trội.",
   openGraph: {
-    title: "TechPro - Tai nghe chính hãng",
+    title: "TechPro - Tai nghe SONY chính hãng",
     description:
       "Khám phá bộ sưu tập tai nghe chính hãng với chất lượng âm thanh vượt trội.",
     url: "https://techpro-deploy.vercel.app/",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "TechPro - Tai nghe chính hãng",
+    title: "TechPro - Tai nghe SONY chính hãng",
     description:
       "Khám phá bộ sưu tập tai nghe chính hãng với chất lượng âm thanh vượt trội.",
     images: ["https://res.cloudinary.com/dlzfacstr/image/upload/v1782921657/sony-ult-wear_kd0xqi.png"],
@@ -77,8 +77,7 @@ export default function RootLayout({
               <Header />
               <main className="flex-1">{children}</main>
               <ConditionalFooter />
-              <CartDrawerWrapper />
-              <AIChatWidget />
+              <ClientWidgets />
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>

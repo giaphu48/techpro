@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { AuthForm } from '@/components/auth/AuthForm';
 
 export const metadata: Metadata = {
-  title: 'Đăng nhập & Đăng ký - TechPro',
+  title: 'TechPro - Đăng nhập & Đăng ký',
   description: 'Truy cập tài khoản TechPro để tận hưởng các ưu đãi và dịch vụ tốt nhất.',
 };
 
@@ -25,7 +25,7 @@ export default function AuthPage() {
           </h1>
           <p className="text-zinc-500 dark:text-zinc-400 text-lg transition-colors duration-300">Khám phá thế giới công nghệ</p>
         </div>
-        
+
         <AuthForm />
       </div>
     </div>

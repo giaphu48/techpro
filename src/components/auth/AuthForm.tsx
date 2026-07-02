@@ -65,16 +65,14 @@ export function AuthForm() {
     try {
       if (isLogin) {
         loginSchema.parse({ email, password });
-        // Call login API
         const response = await api.post('/api/users/login', { email, password });
         login(response.data.user, response.data.token);
         toast.success('Đăng nhập thành công!');
         router.push('/');
       } else {
         registerSchema.parse({ name, email, password });
-        // Call registration API
         const response = await api.post('/api/users', { name, email, password });
-        toast.success(response.data.message || 'Đăng ký thành công! Vui lòng đăng nhập.');
+        toast.success(response.data.message || 'Đăng ký thành công!');
         setIsLogin(true);
         setPassword('');
       }
