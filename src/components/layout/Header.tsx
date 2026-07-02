@@ -2,8 +2,9 @@
 
 import Link from 'next/link';
 import { ThemeToggle } from './ThemeToggle';
-import { ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
+import { useAuth } from '@/context/AuthContext';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -11,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 export function Header() {
     const pathname = usePathname();
     const { totalItems, setIsCartOpen } = useCart();
+    const { user, logout, isLoading } = useAuth();
     const [mounted, setMounted] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -56,12 +58,31 @@ export function Header() {
                         )}
                     </button>
 
-                    <Link
-                        href={pathname === '/auth' ? '/' : '/auth'}
-                        className="hidden sm:inline-flex rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
-                    >
-                        {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập'}
-                    </Link>
+                    {mounted && !isLoading ? (
+                        user ? (
+                            <div className="hidden sm:flex items-center gap-4">
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
+                                    <User className="w-4 h-4" />
+                                    {user.name}
+                                </span>
+                                <button
+                                    onClick={logout}
+                                    className="text-sm font-medium text-red-500 hover:text-red-700 transition-colors"
+                                >
+                                    Đăng xuất
+                                </button>
+                            </div>
+                        ) : (
+                            <Link
+                                href={pathname === '/auth' ? '/' : '/auth'}
+                                className="hidden sm:inline-flex rounded-full bg-black px-4 py-2 text-sm font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+                            >
+                                {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập'}
+                            </Link>
+                        )
+                    ) : (
+                        <div className="hidden sm:inline-flex w-[100px] h-[36px] rounded-full bg-gray-200 dark:bg-gray-800 animate-pulse" />
+                    )}
 
                     {/* Mobile Menu Toggle */}
                     <button
@@ -94,13 +115,33 @@ export function Header() {
                                     {link.label}
                                 </Link>
                             ))}
-                            <Link
-                                href={pathname === '/auth' ? '/' : '/auth'}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="mt-4 text-center rounded-full bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
-                            >
-                                {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập / Đăng ký'}
-                            </Link>
+                            {mounted && !isLoading && user ? (
+                                <div className="mt-4 flex flex-col gap-4">
+                                    <div className="flex items-center gap-3 px-4 py-3 text-base font-medium text-gray-900 dark:text-white bg-gray-100 dark:bg-zinc-900 rounded-xl">
+                                        <div className="p-1.5 bg-gray-200 dark:bg-zinc-800 rounded-lg">
+                                            <User className="w-5 h-5 text-gray-700 dark:text-gray-300" />
+                                        </div>
+                                        <span>Xin chào, {user.name}</span>
+                                    </div>
+                                    <button
+                                        onClick={() => {
+                                            logout();
+                                            setIsMobileMenuOpen(false);
+                                        }}
+                                        className="text-center rounded-xl border border-red-500 px-4 py-3 text-base font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-950 transition-colors"
+                                    >
+                                        Đăng xuất
+                                    </button>
+                                </div>
+                            ) : (
+                                <Link
+                                    href={pathname === '/auth' ? '/' : '/auth'}
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="mt-4 text-center rounded-full bg-black px-4 py-3 text-base font-medium text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200 transition-colors"
+                                >
+                                    {pathname === '/auth' ? 'Về trang chủ' : 'Đăng nhập / Đăng ký'}
+                                </Link>
+                            )}
                         </nav>
                     </motion.div>
                 )}

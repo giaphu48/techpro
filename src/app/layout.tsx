@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { ConditionalFooter } from "@/components/layout/ConditionalFooter";
 import { ThemeProvider } from "@/components/layout/ThemeProvider";
 import { CartProvider } from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import dynamic from "next/dynamic";
 import { CartDrawerWrapper } from "@/components/cart/CartDrawerWrapper";
 
@@ -62,13 +63,15 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col bg-white text-black dark:bg-black dark:text-white">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <CartProvider>
-            <Toaster position="bottom-right" richColors theme="system" />
-            <Header />
-            <main className="flex-1">{children}</main>
-            <ConditionalFooter />
-            <CartDrawerWrapper />
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <Toaster position="bottom-right" richColors theme="system" />
+              <Header />
+              <main className="flex-1">{children}</main>
+              <ConditionalFooter />
+              <CartDrawerWrapper />
+            </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

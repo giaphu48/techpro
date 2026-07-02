@@ -6,6 +6,9 @@ import { toast } from 'sonner';
 import { Mail, Lock, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { z } from 'zod';
+import api from '@/lib/api';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const loginSchema = z.object({
   email: z.string().email('Email không hợp lệ'),
@@ -23,6 +26,9 @@ export function AuthForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
+  const { login } = useAuth();
+  const router = useRouter();
+
   // Form states
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,20 +41,24 @@ export function AuthForm() {
     try {
       if (isLogin) {
         loginSchema.parse({ email, password });
-        // Mock API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        // Call login API
+        const response = await api.post('/api/users/login', { email, password });
+        login(response.data.user, response.data.token);
         toast.success('Đăng nhập thành công!');
+        router.push('/');
       } else {
         registerSchema.parse({ name, email, password });
-        // Mock API call
-        await new Promise((resolve) => setTimeout(resolve, 1500));
-        toast.success('Đăng ký thành công! Vui lòng đăng nhập.');
+        // Call registration API
+        const response = await api.post('/api/users', { name, email, password });
+        toast.success(response.data.message || 'Đăng ký thành công! Vui lòng đăng nhập.');
         setIsLogin(true);
         setPassword('');
       }
-    } catch (error) {
+    } catch (error: any) {
       if (error instanceof z.ZodError) {
         toast.error(error.message);
+      } else if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message);
       } else {
         toast.error('Có lỗi xảy ra. Vui lòng thử lại sau.');
       }
