@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/Hero";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import dynamic from "next/dynamic";
 
 const Features = dynamic(() => import("@/components/home/Features").then(mod => mod.Features));
@@ -8,6 +9,7 @@ const SubscriptionForm = dynamic(() => import("@/components/home/SubscriptionFor
 export default function Home() {
   return (
     <>
+      <SpeedInsights />
       <Hero />
       <Features />
       <TechSpecs />
